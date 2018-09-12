@@ -1,0 +1,18 @@
+{
+  "name": "analytics",
+  "version": "0.1.0",
+  "description": "Server for handling analytics data using zeit now and AWS S3 for storage",
+  "main": "src/index.js",
+  "repository": "https://github.com/straku/analytics.git",
+  "author": "Łukasz Strączyński <lukasz.straczynski@grandparade.co.uk>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "dependencies": {
+    "micro": "^9.3.3",
+    "micro-dev": "^3.0.0"
+  }
+}
