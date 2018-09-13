@@ -1,13 +1,18 @@
 const url = require('url');
-const { send, createError } = require('micro');
+const { send, json, createError } = require('micro');
 
 const scheduler = require('./scheduler');
 
 async function readMeta(req) {
   try {
-    return (await json(req)).meta;
+    const body = await json(req);
+    if (body.meta) {
+      return body.meta;
+    } else {
+      throw new Error('No meta in the body of the request');
+    }
   } catch (error) {
-    console.error('Failed parsing meta', error);
+    console.error('Failed processing meta', error);
     return null;
   }
 }
@@ -19,10 +24,7 @@ async function analytics(req, res) {
 
   if (String(query.all) === 'true') {
     try {
-      const data = {
-        data: await scheduler.getAll(pathname),
-        time: Date.now(),
-      };
+      const data = scheduler.getAll(pathname);
       return send(res, 200, data);
     } catch (err) {
       console.log(err);
@@ -47,11 +49,9 @@ async function analytics(req, res) {
   const shouldIncrement = String(query.inc) !== 'false';
   try {
     let meta;
-    const currentViews = (await scheduler.has(pathname))
-      ? (await scheduler.get(pathname)).views.length
+    const currentViews = scheduler.has(pathname)
+      ? scheduler.get(pathname).views.length
       : 0;
-
-    console.log(await scheduler.has(pathname));
 
     if (req.method === 'POST') {
       meta = await readMeta(req);
@@ -63,10 +63,8 @@ async function analytics(req, res) {
     }
 
     if (shouldIncrement) {
-      await scheduler.put(pathname, data);
+      scheduler.put(pathname, data);
     }
-
-    console.log('--', scheduler.data);
 
     send(res, 200, {
       views: shouldIncrement ? currentViews + 1 : currentViews,

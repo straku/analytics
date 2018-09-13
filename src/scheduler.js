@@ -1,31 +1,41 @@
+function convertMapToArray(map) {
+  let array = [];
+  for (const [pathname, views] of map) {
+    array.push({
+      pathname,
+      ...views,
+    });
+  }
+  return array;
+}
+
 function createScheduler() {
-  let data = [];
+  const data = new Map();
 
   return {
-    data,
-    async getAll(pathname) {
+    getAll(pathname) {
+      const serializedData = convertMapToArray(data);
       if (!pathname) {
-        return data;
+        return serializedData;
       }
-      return data.filter(item => item.pathname.startsWith(pathname));
+      return serializedData.filter(item => item.pathname.startsWith(pathname));
     },
-    async has(pathname) {
-      return data.findIndex(item => item.pathname === pathname) > -1;
+    has(pathname) {
+      return data.has(pathname);
     },
-    async get(pathname) {
-      return data.find(item => item.pathname === pathname);
+    get(pathname) {
+      return data.get(pathname);
     },
-    async put(pathname, meta) {
-      const item = await this.get(pathname);
+    put(pathname, meta) {
+      const item = data.get(pathname);
       if (item) {
         item.views.push(meta);
         return item;
       } else {
         const newItem = {
-          pathname,
           views: [meta],
         };
-        data.push(newItem);
+        data.set(pathname, newItem);
         return newItem;
       }
     },
