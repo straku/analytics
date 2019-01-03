@@ -1,7 +1,7 @@
 {
   "name": "analytics",
   "version": "0.1.0",
-  "description": "Server for handling analytics data using zeit now and keen.io",
+  "description": "Server for handling analytics data using micro and keen.io for events storage",
   "main": "index.js",
   "repository": "github:straku/analytics",
   "author": "Łukasz Strączyński <l.straczynski@hotmail.com>",
