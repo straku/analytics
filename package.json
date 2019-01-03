@@ -1,10 +1,10 @@
 {
   "name": "analytics",
   "version": "0.1.0",
-  "description": "Server for handling analytics data using zeit now and AWS S3 for storage",
+  "description": "Server for handling analytics data using zeit now and keen.io",
   "main": "src/index.js",
-  "repository": "https://github.com/straku/analytics.git",
-  "author": "Łukasz Strączyński <lukasz.straczynski@grandparade.co.uk>",
+  "repository": "github:straku/analytics",
+  "author": "Łukasz Strączyński <l.straczynski@hotmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -12,7 +12,10 @@
     "dev": "micro-dev"
   },
   "dependencies": {
-    "micro": "^9.3.3",
+    "micro": "^9.3.3"
+  },
+  "devDependencies": {
+    "@straku/prettier-config": "^1.0.2",
     "micro-dev": "^3.0.0"
   }
 }
