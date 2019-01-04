@@ -12,7 +12,8 @@
     "dev": "micro-dev"
   },
   "dependencies": {
-    "micro": "^9.3.3"
+    "micro": "^9.3.3",
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "@straku/prettier-config": "^1.0.2",
