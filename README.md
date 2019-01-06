@@ -8,7 +8,7 @@ API heavily inspired by [micro-analytics](https://github.com/micro-analytics/mic
 
 I was looking for a simple solution for counting views or simple events on my personal site. I wanted to keep it simple by setting up following constraints:
 - zero cookies usage on the site
-- neglible effect on bundle size of the site
+- negligible effect on bundle size of the site
 - nice UI for browsing events
 - gather useful information about the users (location, device type) without any way of identyfing them
 - minimize "sysadmin" work needed to get it up and running (ideally no full blown database to store the events
